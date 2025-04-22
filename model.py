@@ -21,7 +21,7 @@ CORS(app)
 logging.basicConfig(level=logging.INFO)
 
 # Load MySQL engine
-engine = create_engine("mysql+mysqlconnector://root:root@localhost/heartdb")
+engine = create_engine("mysql+mysqlconnector://root:root@heartdb.crq4w4a2ajsu.ap-south-1.rds.amazonaws.com/heartdb")
 
 # Load data
 df = pd.read_sql("SELECT * FROM clustered_lifestyle_data", engine)
