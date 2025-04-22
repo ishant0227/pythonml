@@ -19,10 +19,21 @@ CORS(app)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
+import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
 
-# Load MySQL engine
-engine = create_engine("mysql+mysqlconnector://admin:Ishant928@heartdb.crq4w4a2ajsu.ap-south-1.rds.amazonaws.com/heartdb")
+# Load environment variables
+load_dotenv()
 
+# Get values
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_NAME = os.getenv("DB_NAME")
+
+# Create engine securely
+engine = create_engine(f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}")
 # Load data
 df = pd.read_sql("SELECT * FROM clustered_lifestyle_data", engine)
 
